@@ -11,7 +11,7 @@
 
 - `ssh root@m0.sikademo.com`
 
-```
+```bash
 curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sh
 apt-get install -y open-iscsi
 curl -sfL https://get.rke2.io | sh -
@@ -33,13 +33,13 @@ systemctl start rke2-server.service
 
 Validate
 
-```
+```bash
 /var/lib/rancher/rke2/bin/kubectl --kubeconfig /etc/rancher/rke2/rke2.yaml get nodes
 ```
 
 Install kubectl and helm to default path
 
-```
+```bash
 slu install-bin kubectl
 slu install-bin helm
 ln -s /usr/local/bin/kubectl /usr/local/bin/k
@@ -47,7 +47,7 @@ ln -s /usr/local/bin/kubectl /usr/local/bin/k
 
 Create ~/.kube/config
 
-```
+```bash
 mkdir -p $HOME/.kube
 sudo cp /etc/rancher/rke2/rke2.yaml $HOME/.kube/config
 ```
@@ -57,7 +57,7 @@ sudo cp /etc/rancher/rke2/rke2.yaml $HOME/.kube/config
 - `ssh root@m1.sikademo.com`
 - `ssh root@m2.sikademo.com`
 
-```
+```bash
 curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sh
 apt-get install -y open-iscsi
 curl -sfL https://get.rke2.io | sh -
@@ -85,7 +85,7 @@ systemctl start rke2-server.service
 - `ssh root@w2.sikademo.com`
 - `ssh root@w3.sikademo.com`
 
-```
+```bash
 curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sh
 apt-get install -y open-iscsi
 curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
@@ -102,7 +102,7 @@ systemctl start rke2-agent.service
 
 - `ssh root@m0.sikademo.com`
 
-```
+```bash
 helm upgrade --install \
 ingress-nginx ingress-nginx \
 --repo https://kubernetes.github.io/ingress-nginx \
@@ -121,7 +121,7 @@ ingress-nginx ingress-nginx \
 
 - `ssh root@m0.sikademo.com`
 
-```
+```bash
 helm upgrade --install \
 cert-manager cert-manager \
 --repo https://charts.jetstack.io \
@@ -133,7 +133,7 @@ cert-manager cert-manager \
 
 Install ClusterIssuer
 
-```
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -156,7 +156,7 @@ EOF
 
 - `ssh root@m0.sikademo.com`
 
-```
+```bash
 helm upgrade --install \
 longhorn longhorn \
 --repo https://charts.longhorn.io \
